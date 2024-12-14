@@ -244,13 +244,13 @@ int seat_set_active(Seat *s, Session *session) {
 
         if (old_active) {
                 session_device_pause_all(old_active);
-                session_send_changed(old_active, "Active", NULL);
+                (void) session_send_changed(old_active, "Active", "State", NULL);
         }
 
         (void) seat_apply_acls(s, old_active);
 
         if (session && session->started) {
-                session_send_changed(session, "Active", NULL);
+                (void) session_send_changed(session, "Active", "State", NULL);
                 session_device_resume_all(session);
         }
 

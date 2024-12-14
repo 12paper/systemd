@@ -968,6 +968,8 @@ int session_stop(Session *s, bool force) {
         (void) session_save(s);
         (void) user_save(s->user);
 
+        (void) session_send_changed(s, "State", NULL);
+
         return r;
 }
 
